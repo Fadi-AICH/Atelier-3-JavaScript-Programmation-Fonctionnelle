@@ -142,9 +142,9 @@ new Chart(ctx, {
 - **🤖 Intelligence Fonctionnelle JS** — ENSIT  
 
 ---
+## ✨ Citation Deep du jour
 
-## ✨ Citation Dev du jour
+![Quote](https://quotes-github-readme.vercel.app/api?type=horizontal&theme=tokyonight)
 
-![Citation du jour](https://readme-quote-api.vercel.app/api?quote=Le%20code%20le%20plus%20puissant%20n’est%20pas%20celui%20qui%20impressionne%2C%20mais%20celui%20qui%20disparaît%20derrière%20la%20simplicité%20de%20son%20intention.&author=Dev%20Unknown)
+> *"La profondeur n'est pas dans les mots, mais dans l'empreinte qu'ils laissent."*
 
----
