@@ -1,0 +1,18 @@
+[
+    { "name": "Ordinateur portable Dell XPS 13", "price": 1299, "category": "Électronique", "stock": 8 },
+    { "name": "iPhone 15 Pro", "price": 1399, "category": "Électronique", "stock": 5 },
+    { "name": "Casque Bose QuietComfort 45", "price": 299, "category": "Audio", "stock": 12 },
+    { "name": "Table de bureau en bois", "price": 349, "category": "Mobilier", "stock": 7 },
+    { "name": "Chaise ergonomique Herman Miller", "price": 999, "category": "Mobilier", "stock": 3 },
+    { "name": "Lampe LED de bureau", "price": 59, "category": "Décoration", "stock": 15 },
+    { "name": "Tapis de souris XXL", "price": 25, "category": "Accessoires", "stock": 30 },
+    { "name": "Souris Logitech MX Master 3S", "price": 129, "category": "Électronique", "stock": 10 },
+    { "name": "Samsung Galaxy Tab S9", "price": 899, "category": "Électronique", "stock": 6 },
+    { "name": "Sac à dos pour ordinateur portable", "price": 89, "category": "Accessoires", "stock": 20 },
+    { "name": "Téléviseur Samsung QLED 55\"", "price": 999, "category": "Électronique", "stock": 4 },
+    { "name": "Enceinte Bluetooth JBL Flip 6", "price": 149, "category": "Audio", "stock": 18 },
+    { "name": "Bureau réglable en hauteur", "price": 499, "category": "Mobilier", "stock": 2 },
+    { "name": "Imprimante HP LaserJet Pro", "price": 199, "category": "Électronique", "stock": 9 },
+    { "name": "Câble USB-C ultra-rapide", "price": 19, "category": "Accessoires", "stock": 50 }
+  ]
+  

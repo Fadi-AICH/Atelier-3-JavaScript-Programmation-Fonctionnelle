@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Catalogue Produits - Version Simple</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<h1>Catalogue Produits</h1>
+
+<!-- Contrôles -->
+<div>
+  <input type="file" id="fileInput" accept=".json">
+  <input type="text" id="search" placeholder="Rechercher..." oninput="searchProduct()">
+  <select id="categorySelect" onchange="filterByCategory()">
+    <option value="">Toutes les catégories</option>
+  </select>
+  <button onclick="sortByPrice()">Trier par prix</button>
+  <button onclick="sortByStock()">Trier par stock</button>
+  <button onclick="findLowStock()">Produits en faible stock</button>
+</div>
+
+<!-- Affichage du prix total -->
+<p id="totalPrice"></p>
+
+<!-- Liste des produits -->
+<div id="productList"></div>
+
+<!-- Graphique -->
+<canvas id="productChart" width="600" height="300"></canvas>
+
+<script>
+  let products = [];
+  let displayedProducts = [];
+
+  document.getElementById('fileInput').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      products = JSON.parse(e.target.result);
+      displayedProducts = [...products];
+      populateCategories(products);
+      displayProducts(products);
+      calculateTotalPrice(products);
+      renderChart(products);
+    };
+    reader.readAsText(file);
+  });
+
+  function populateCategories(data) {
+    const select = document.getElementById('categorySelect');
+    select.innerHTML = '<option value="">Toutes les catégories</option>';
+    const categories = [...new Set(data.map(p => p.category))];
+    categories.forEach(cat => {
+      const option = document.createElement('option');
+      option.value = cat;
+      option.textContent = cat;
+      select.appendChild(option);
+    });
+  }
+
+  function displayProducts(data) {
+    const list = document.getElementById('productList');
+    list.innerHTML = '';
+    data.forEach(p => {
+      const div = document.createElement('div');
+      div.innerHTML = `<strong>${p.name}</strong><br>
+        Catégorie: ${p.category}<br>
+        Prix: ${p.price} €<br>
+        Stock: ${p.stock}<br><br>`;
+      list.appendChild(div);
+    });
+    displayedProducts = data;
+  }
+
+  function calculateTotalPrice(data) {
+    const total = data.reduce((sum, p) => sum + p.price, 0).toFixed(2);
+    document.getElementById('totalPrice').textContent = "Prix total : " + total + " €";
+  }
+
+  function searchProduct() {
+    const term = document.getElementById('search').value.toLowerCase();
+    const filtered = products.filter(p => p.name.toLowerCase().includes(term));
+    displayProducts(filtered);
+    calculateTotalPrice(filtered);
+    renderChart(filtered);
+  }
+
+  function filterByCategory() {
+    const category = document.getElementById('categorySelect').value;
+    const filtered = category ? products.filter(p => p.category === category) : products;
+    displayProducts(filtered);
+    calculateTotalPrice(filtered);
+    renderChart(filtered);
+  }
+
+  function sortByPrice() {
+    const sorted = [...displayedProducts].sort((a, b) => a.price - b.price);
+    displayProducts(sorted);
+    calculateTotalPrice(sorted);
+    renderChart(sorted);
+  }
+
+  function sortByStock() {
+    const sorted = [...displayedProducts].sort((a, b) => a.stock - b.stock);
+    displayProducts(sorted);
+    calculateTotalPrice(sorted);
+    renderChart(sorted);
+  }
+
+  function findLowStock() {
+    const filtered = products.filter(p => p.stock <= 3);
+    displayProducts(filtered);
+    calculateTotalPrice(filtered);
+    renderChart(filtered);
+  }
+
+  function renderChart(data) {
+    const ctx = document.getElementById('productChart').getContext('2d');
+    if (window.barChart) window.barChart.destroy();
+    window.barChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: data.map(p => p.name),
+        datasets: [{
+          label: 'Stock',
+          data: data.map(p => p.stock),
+          backgroundColor: 'lightblue'
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false }
+        }
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
